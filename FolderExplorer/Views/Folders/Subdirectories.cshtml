@@ -2,13 +2,16 @@
 @{
     ViewData["Title"] = "Subdirectory";
 }
+<h4>
+    Current directory: @Model.First().Path
+</h4>
 <div>
     @{
         <ul>
-            @foreach (var item in Model)
+            @for(int i = 1; i < Model.Count; ++i)
             {
                 <li >
-                    <a href="@Url.Action("Subdirectories", "Folders", new { id = item.Id })">@item.Path</a>
+                    <a href="@Url.Action("Subdirectories", "Folders", new { id = @Model[i].Id })">@Model[i].Path</a>
                 </li>
             }
         </ul>

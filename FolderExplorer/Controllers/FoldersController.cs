@@ -48,7 +48,12 @@ namespace FolderExplorer.Controllers
         public IActionResult Subdirectories(int id)
         {
             var ids = FindSubdirectories(id);
-            var folders = _context.Folder.Where(a => ids.Contains(a.Id)).ToList();
+
+            var folders = new List<Folder>
+            {
+                _context.Folder.Find(id)
+            };
+            folders.AddRange(_context.Folder.Where(a => ids.Contains(a.Id)).ToList());
             return View(folders);
         }
 
