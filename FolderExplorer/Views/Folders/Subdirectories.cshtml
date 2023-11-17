@@ -1,0 +1,19 @@
+﻿@model List<Folder>
+@{
+    ViewData["Title"] = "Subdirectory";
+}
+<div>
+    @{
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li >
+                    <a href="@Url.Action("Subdirectories", "Folders", new { id = item.Id })">@item.Path</a>
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+
+

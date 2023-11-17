@@ -1,0 +1,15 @@
+﻿@model FolderExplorer.Models.Folder
+@{
+    ViewData["Title"] = "Display Data";
+}
+<div>
+    @{
+        <ul>
+            <li>
+                <a href="@Url.Action("Subdirectories", "Folders", new { id = Model.Id })">@Model.Path</a>
+            </li>
+        </ul>
+    }
+</div>
+
+
