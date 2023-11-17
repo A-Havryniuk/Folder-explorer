@@ -1,4 +1,5 @@
 CREATE DATABASE Folders;
+GO
 USE Folders;
 
 CREATE TABLE Folder (
