@@ -19,12 +19,22 @@ namespace FolderExplorer.Controllers
         public IActionResult Index()
         {
             var folders = _context.Folder;
-            var root = folders.First();
-            if (FindRootDirectory() != null)
+            if (!folders.Any())
             {
-                Console.WriteLine(folders.Find(FindRootDirectory()));
+                return RedirectToAction("EmptyDataBase", "Folders");
+            }
+            var root = folders.First();
+            var rootDirId = FindRootDirectory();
+            if ( rootDirId != null)
+            {
+                root = folders.Find(rootDirId);
             }
             return View(root);
+        }
+
+        public IActionResult EmptyDataBase()
+        {
+            return View(); 
         }
 
         [HttpGet]
@@ -37,14 +47,14 @@ namespace FolderExplorer.Controllers
         }
 
 
-        private int? FindRootDirectory()
+        private int FindRootDirectory()
         {
             var list1 = _context.FolderRelations.Select(a => a.FatherId).ToList();
             var list2 = _context.FolderRelations.Select(b => b.ChildId).ToList();
             return  list1.Except(list2).First();
         }
 
-        private List<int?> FindSubdirectories(int id)
+        private List<int> FindSubdirectories(int id)
         {
             return _context.FolderRelations
                 .Where(fr => fr.FatherId == id)

@@ -8,18 +8,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FolderExplorer.Models;
 
-[Keyless]
 public partial class FolderRelations
 {
+    [Key]
+    [Column("id")]
+    public int Id { get; set; }
+
     [Column("father_id")]
-    public int? FatherId { get; set; }
+    public int FatherId { get; set; }
 
     [Column("child_id")]
-    public int? ChildId { get; set; }
+    public int ChildId { get; set; }
 
     [ForeignKey("ChildId")]
+    [InverseProperty("FolderRelationsChild")]
     public virtual Folder Child { get; set; }
 
     [ForeignKey("FatherId")]
+    [InverseProperty("FolderRelationsFather")]
     public virtual Folder Father { get; set; }
 }

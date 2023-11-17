@@ -22,18 +22,27 @@ public partial class FoldersContext : DbContext
 
     public virtual DbSet<FolderRelations> FolderRelations { get; set; }
 
+ 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Folder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Folder__3213E83F15BC6B06");
+            entity.HasKey(e => e.Id).HasName("PK__Folder__3213E83F944D8C13");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<FolderRelations>(entity =>
         {
-            entity.HasOne(d => d.Child).WithMany().HasConstraintName("FK__FolderRel__child__398D8EEE");
+            entity.HasKey(e => e.Id).HasName("PK__FolderRe__3213E83F85133195");
 
-            entity.HasOne(d => d.Father).WithMany().HasConstraintName("FK__FolderRel__fathe__38996AB5");
+            entity.HasOne(d => d.Child).WithMany(p => p.FolderRelationsChild)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__FolderRel__child__52593CB8");
+
+            entity.HasOne(d => d.Father).WithMany(p => p.FolderRelationsFather)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__FolderRel__fathe__5165187F");
         });
 
         OnModelCreatingPartial(modelBuilder);

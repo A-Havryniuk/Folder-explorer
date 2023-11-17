@@ -4,16 +4,17 @@
 @{
 }
 <p>
-    If you want to upload data from files, you should click two buttons and chose two different files with certain data
+    If you want to upload data from files, you should click two buttons and chose two different files with certain data.
+    First file for folder id and its name. Second file for folder relations. Files should be in csv format
+
 </p>
 <br/>
-<input id="updatedLocation" name="updatedLocation" type="text" />
-
-<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("", "Import")'">Upload folder catalog from file</button>
+<form method="post" enctype="multipart/form-data" action="@Url.Action("UploadFolderCatalog", "Import")">
+    <input class="form-control" name="file1" type="file" />
+    <input class="form-control" name="file2" type="file" />
+    <button class="btn btn-primary" type="submit">Upload folder catalog from file</button>
+</form>
 <br />
-<br />
-<input type="text" />
-<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("", "Import")'">Upload folder relations from file</button>
 <br />
 <p>
     If you want to upload folder catalog from operating system, click the button under this text

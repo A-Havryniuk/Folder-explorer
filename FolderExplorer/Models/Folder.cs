@@ -14,8 +14,15 @@ public partial class Folder
     [Column("id")]
     public int Id { get; set; }
 
+    [Required]
     [Column("path")]
     [StringLength(511)]
     [Unicode(false)]
     public string Path { get; set; }
+
+    [InverseProperty("Child")]
+    public virtual ICollection<FolderRelations> FolderRelationsChild { get; set; } = new List<FolderRelations>();
+
+    [InverseProperty("Father")]
+    public virtual ICollection<FolderRelations> FolderRelationsFather { get; set; } = new List<FolderRelations>();
 }
