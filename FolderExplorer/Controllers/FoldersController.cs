@@ -23,11 +23,17 @@ namespace FolderExplorer.Controllers
             {
                 return RedirectToAction("EmptyDataBase", "Folders");
             }
-            var root = folders.First();
+
+            var root = new List<Folder>();
+            root.Add(folders.First());
             var rootDirId = FindRootDirectory();
-            if ( rootDirId != null)
+            if ( rootDirId.Count > 0)
             {
-                root = folders.Find(rootDirId);
+                root.Clear();
+                foreach (var item in rootDirId)
+                {
+                    root.Add(folders.Find(item));
+                }
             }
             return View(root);
         }
@@ -47,11 +53,11 @@ namespace FolderExplorer.Controllers
         }
 
 
-        private int FindRootDirectory()
+        private List<int> FindRootDirectory()
         {
             var list1 = _context.FolderRelations.Select(a => a.FatherId).ToList();
             var list2 = _context.FolderRelations.Select(b => b.ChildId).ToList();
-            return  list1.Except(list2).First();
+            return  list1.Except(list2).ToList();
         }
 
         private List<int> FindSubdirectories(int id)
@@ -89,8 +95,8 @@ namespace FolderExplorer.Controllers
                 }
             }
 
-            var idAndNameFilePath = "path_to_id_and_name_file.csv";
-            var parentAndChildIdsFilePath = "path_to_parent_and_child_ids_file.csv";
+            var idAndNameFilePath = "id_and_name_file.csv";
+            var parentAndChildIdsFilePath = "parent_and_child_ids_file.csv";
 
             System.IO.File.WriteAllText(idAndNameFilePath, idAndNameCsvExport.ToString());
             System.IO.File.WriteAllText(parentAndChildIdsFilePath, parentAndChildIdsCsvExport.ToString());

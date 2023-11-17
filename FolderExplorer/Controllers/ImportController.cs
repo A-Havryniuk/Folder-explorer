@@ -68,6 +68,13 @@ namespace FolderExplorer.Controllers
 
         private void WriteFoldersToDataBase(List<Folder> folders)
         {
+            ClearDataBase();
+            folders.ForEach(a=> _context.Folder.Add(a));
+            _context.SaveChanges();
+        }
+
+        private void ClearDataBase()
+        {
             foreach (var relation in _context.FolderRelations)
             {
                 _context.FolderRelations.Remove(relation);
@@ -78,8 +85,6 @@ namespace FolderExplorer.Controllers
             }
 
             _context.SaveChanges();
-            folders.ForEach(a=> _context.Folder.Add(a));
-            _context.SaveChanges();
         }
 
         private void WriteFolderRelationsToDataBase(List<FolderRelations> relations)
@@ -87,8 +92,6 @@ namespace FolderExplorer.Controllers
             relations.ForEach(a => _context.FolderRelations.Add(a));
             _context.SaveChanges();
         }
-
-
 
         private class FolderRelationsMap : ClassMap<FolderRelations>
         {

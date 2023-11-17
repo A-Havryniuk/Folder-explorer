@@ -8,17 +8,20 @@
     First file for folder id and its name. Second file for folder relations. Files should be in csv format
 
 </p>
-<br/>
+
 <form method="post" enctype="multipart/form-data" action="@Url.Action("UploadFolderCatalog", "Import")">
-    <input class="form-control" name="file1" type="file" />
-    <input class="form-control" name="file2" type="file" />
-    <button class="btn btn-primary" type="submit">Upload folder catalog from file</button>
+    <div class="import-control">
+        <label>Select file with folders and ids</label>
+        <input class="form-control" name="file1" type="file"/>
+    </div>
+    <div class="import-control">
+        <label>Select file with folder relations</label>
+        <input class="form-control" name="file2" type="file"/>
+    </div>
+    <div class="import-control">
+        <button class="btn btn-primary" type="submit">Upload folder catalog from file</button>
+    </div>
 </form>
-<br />
-<br />
-<p>
-    If you want to upload folder catalog from operating system, click the button under this text
-</p>
-<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("", "Import")'">Upload folders from operating system</button>
+
 
 

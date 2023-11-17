@@ -1,13 +1,16 @@
-﻿@model FolderExplorer.Models.Folder
+﻿@model List<Folder>
 @{
     ViewData["Title"] = "Display Data";
 }
 <div>
     @{
         <ul>
-            <li>
-                <a href="@Url.Action("Subdirectories", "Folders", new { id = Model.Id })">@Model.Path</a>
-            </li>
+            @foreach (var item in Model)
+            {
+                <li class="folder">
+                    <a href="@Url.Action("Subdirectories", "Folders", new { id = item.Id })">@item.Path</a>
+                </li>
+            }
         </ul>
     }
 </div>

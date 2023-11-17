@@ -4,7 +4,7 @@ html {
 
 @media (min-width: 768px) {
     html {
-        font-size: 16px;
+        font-size: 18px;
     }
 }
 
@@ -31,7 +31,12 @@ a {
         outline: none; 
         color: #e74c3c; 
     }
-
+    input::after,
+    input,
+    input::selection
+    input:checked{
+        text-decoration: none;
+    }
 html {
     position: relative;
     min-height: 100%;
@@ -39,4 +44,13 @@ html {
 
 body {
     margin-bottom: 60px;
+}
+
+.import-control {
+    margin: 15px 0;
+}
+
+.folder {
+    margin: 5px 0;
+    padding: 5px 5px;
 }
