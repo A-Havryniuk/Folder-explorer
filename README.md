@@ -1,7 +1,7 @@
 # Folder-explorer
 Web-application for displaying directories structure. 
 # Project description
-  Asp.net.core mvc web application for displaying directories structure. Folder structure is loaded from database where is two tables. First table has columns (id, name) and second has columns (id, father_id, child_id).
+  Asp.net.core mvc web application for displaying directories structure. Folder structure is loaded from database where are two tables. First table has columns (id, name) and second has columns (id, father_id, child_id).
 Also you can download directories structure from csv files (structure same as database tables).
 I hope I will implement also upload directories structure from OS (by choosing certain folder and all inner folders will be displayed).
 # Install and run the project
